@@ -4,13 +4,13 @@ set -e
 
 # === Load .env config ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-. "$SCRIPT_DIR/env"
+. "$SCRIPT_DIR/.env"
 
 # === Validate required .env fields ===
 required_vars="SERVICE_NAME SERVICE_PATH RCLONE_REMOTE REMOTE_FOLDER RCLONE_CONFIG_PATH ENCRYPT_PASSWORD CRON_SCHEDULE"
 for var in $required_vars; do
   if [ -z "$(eval echo \$$var)" ]; then
-    echo "[ERROR] $var is not set in env"
+    echo "[ERROR] $var is not set in .env"
     exit 1
   fi
 done
@@ -61,10 +61,6 @@ else
 fi
 
 echo "[4/5] Running backup script once for testing..."
-if [ -f .env ]; then
-  $backup_script || echo "[WARN] Backup test failed. Please check .env or rclone config."
-else
-  echo "[WARN] .env not found. Please create and configure it before running backups."
-fi
+$backup_script || echo "[WARN] Backup test failed. Please check .env or rclone config."
 
-echo "[5/5] Setup complete. Backups will run daily at 00:30. Log file: $log_file"
+echo "[5/5] Setup complete. Backups will run on schedule: '$CRON_SCHEDULE'. Log file: $log_file"

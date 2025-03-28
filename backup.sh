@@ -4,13 +4,13 @@ set -e
 
 # === Load config ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-. "$SCRIPT_DIR/env"
+. "$SCRIPT_DIR/.env"
 
 # === Validate required fields ===
 required_vars="SERVICE_NAME SERVICE_PATH RCLONE_REMOTE REMOTE_FOLDER RCLONE_CONFIG_PATH ENCRYPT_PASSWORD"
 for var in $required_vars; do
   if [ -z "$(eval echo \$$var)" ]; then
-    echo "[ERROR] $var is not set in env"
+    echo "[ERROR] $var is not set in .env"
     exit 1
   fi
 done
@@ -34,10 +34,10 @@ echo "$ENCRYPT_PASSWORD" | gpg --batch --yes --passphrase-fd 0 \
 
 # === Upload encrypted archive to remote ===
 docker run --rm \
-  -v "$gpg_path:/backup.tgz.gpg" \
+  -v "$gpg_path:/data/$encrypted_file" \
   -v "$rclone_config_path:/config/rclone.conf" \
   rclone/rclone:latest \
-  copy /backup.tgz.gpg "$remote_path" --config /config/rclone.conf -P
+  copy "/data/$encrypted_file" "$remote_path" --config /config/rclone.conf -P
 
 # === Cleanup local temp files ===
 rm -f "$tar_path" "$gpg_path"
