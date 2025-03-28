@@ -8,7 +8,7 @@ It is designed to:
 - 🔐 Encrypt the backups using GPG (AES-256, password-based)
 - ☁️ Upload the encrypted archive to any rclone-compatible remote (Google Drive, S3, WebDAV, etc.)
 - 🐳 Run `rclone` via Docker — no installation needed
-- 🧩 Be fully configurable via `.env`
+- 🧩 Be fully configurable
 - 🕒 Schedule daily backup via `cron`
 
 ---
