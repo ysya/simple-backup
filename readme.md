@@ -52,7 +52,7 @@ vim env
 
 ### 3. Run the install script
 ```bash
-chmod +x setup.sh
+chmod +x setup.sh backup.sh
 ./setup.sh
 ```
 

@@ -25,7 +25,7 @@ rclone_config_path=$(eval echo "$RCLONE_CONFIG_PATH")
 remote_path="${RCLONE_REMOTE}:${REMOTE_FOLDER}"
 
 # === Create tar.gz archive ===
-tar -czf "$tar_path" "$SERVICE_PATH"
+tar -czf "$tar_path" -C "$(dirname "$SERVICE_PATH")" "$(basename "$SERVICE_PATH")"
 
 # === GPG encrypt the archive with password ===
 echo "$ENCRYPT_PASSWORD" | gpg --batch --yes --passphrase-fd 0 \
