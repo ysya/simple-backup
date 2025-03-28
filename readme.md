@@ -43,3 +43,27 @@ This tool is built for:
 git clone https://github.com/ysya/simple-backup.git
 cd simple-backup
 ```
+
+### 2. Prepare your config
+```bash
+cp env.example env
+vim env
+```
+
+### 3. Run the install script
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+## 📦 What It Does
+- Compresses `$SERVICE_PATH `into a .tgz file
+- Encrypts it with GPG using `ENCRYPT_PASSWORD`
+- Uploads it to `$RCLONE_REMOTE:$REMOTE_FOLDER` using Dockerized rclone
+- Keeps only the last 30 days of backups
+- Schedules a cron job to run
+
+## 💬 Manual Backup (optional)
+```bash
+./backup.sh
+```
