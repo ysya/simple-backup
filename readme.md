@@ -24,17 +24,6 @@ This tool is built for:
 
 ---
 
-## 📁 Project Structure
-
-```├── backup.sh # Main backup logic (compression + encryption + upload) 
-├── install.sh # Setup script: Docker check, rclone config, cron 
-├── env # Your backup configuration 
-├── env.example # Configuration template
-```
-
-
----
-
 ## ⚙️ Setup
 
 ### 1. Clone this repo
