@@ -35,8 +35,8 @@ cd simple-backup
 
 ### 2. Prepare your config
 ```bash
-cp env.example env
-vim env
+cp .env.example .env
+vim .env
 ```
 
 ### 3. Run the install script
