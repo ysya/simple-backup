@@ -35,7 +35,7 @@ echo "$ENCRYPT_PASSWORD" | gpg --batch --yes --passphrase-fd 0 \
 # === Upload encrypted archive to remote ===
 docker run --rm \
   -v "$gpg_path:/data/$encrypted_file" \
-  -v "$rclone_config_path:/config/rclone.conf" \
+  -v "$rclone_config_path:/config" \
   rclone/rclone:latest \
   copy "/data/$encrypted_file" "$remote_path" --config /config/rclone.conf -P
 
@@ -44,7 +44,7 @@ rm -f "$tar_path" "$gpg_path"
 
 # === Remove old backups (older than 30d) from remote ===
 docker run --rm \
-  -v "$rclone_config_path:/config/rclone.conf" \
+  -v "$rclone_config_path:/config" \
   rclone/rclone:latest \
   delete "$remote_path" \
   --config /config/rclone.conf \
