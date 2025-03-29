@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+trap 'rm -f "$tar_path" "$gpg_path"' EXIT
 
 # === Load config ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
