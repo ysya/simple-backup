@@ -49,7 +49,7 @@ docker run --rm \
   rclone/rclone:latest \
   delete "$remote_path" \
   --config /config/rclone.conf \
-  --min-age 14d \
+  --min-age "$MIN_AGE" \
   --include "${SERVICE_NAME}-*.tgz.gpg" \
   -P
 
